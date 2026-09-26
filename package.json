@@ -1,5 +1,5 @@
 {
-  "name": "coin-card",
+  "name": "nexapay-card",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -13,6 +13,10 @@
   },
   "dependencies": {
     "@solana/web3.js": "^1.99.0",
-    "qrcode": "^1.5.4"
+    "@vitejs/plugin-react": "^4.3.4",
+    "gsap": "^3.15.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
