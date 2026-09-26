@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Odyssey — Claymorphism Concept</title>
+<style>
+  :root{
+    --bg:#EFE9FB;
+    --bg-2:#E4DBF9;
+    --surface:#F7F3FF;
+    --white:#FFFFFF;
+    --lav-1:#C9B8FA;
+    --lav-2:#A78BFA;
+    --lav-3:#8B6BF0;
+    --plum:#4B3B86;
+    --plum-deep:#2E2154;
+    --ink:#3C2F66;
+    --muted:#7A6FA3;
+
+    /* clay shadow pair: soft light highlight + soft dark depth */
+    --clay-light: #FFFFFF;
+    --clay-dark: #C3B3EE;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 100%);
+    color:var(--ink);
+    font-family:"Poppins","Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* ---------- shared clay primitive ---------- */
+  .clay{
+    background:var(--surface);
+    border-radius:28px;
+    box-shadow:
+      8px 8px 18px var(--clay-dark),
+      -8px -8px 18px var(--clay-light);
+  }
+  .clay-inset{
+    box-shadow:
+      inset 6px 6px 14px var(--clay-dark),
+      inset -6px -6px 14px var(--clay-light);
+  }
+  .clay-pop{
+    background:linear-gradient(150deg, #FFFFFF, #F2ECFF);
+    box-shadow:
+      10px 10px 22px var(--clay-dark),
+      -10px -10px 22px var(--clay-light);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 0;
+  }
+  .logo{
+    display:flex; align-items:center; gap:12px;
+    font-weight:700; font-size:19px; letter-spacing:.04em;
+    color:var(--plum-deep);
+  }
+  .logo-mark{
+    width:42px; height:42px; border-radius:16px;
+    display:grid; place-items:center;
+    background:linear-gradient(150deg, #C9B8FA, #8B6BF0);
+    box-shadow:
+      6px 6px 14px var(--clay-dark),
+      -6px -6px 14px var(--clay-light);
+  }
+  .logo-mark svg{width:20px; height:20px;}
+  nav{
+    display:flex; align-items:center; gap:6px;
+    background:var(--surface);
+    border-radius:999px;
+    padding:6px;
+    box-shadow:
+      inset 4px 4px 10px var(--clay-dark),
+      inset -4px -4px 10px var(--clay-light);
+  }
+  nav a{
+    color:var(--muted); text-decoration:none;
+    font-size:13.5px; font-weight:600;
+    padding:10px 18px; border-radius:999px;
+  }
+  nav a.active{
+    color:var(--plum-deep);
+    background:var(--white);
+    box-shadow:
+      4px 4px 10px var(--clay-dark),
+      -4px -4px 10px var(--clay-light);
+  }
+  .nav-right{display:flex; align-items:center; gap:12px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:700; font-family:inherit;
+    padding:12px 22px; border-radius:999px; border:none; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:active{transform:translateY(2px) scale(.98);}
+  .btn-clay{
+    background:var(--surface); color:var(--plum-deep);
+    box-shadow:
+      6px 6px 14px var(--clay-dark),
+      -6px -6px 14px var(--clay-light);
+  }
+  .btn-clay:hover{box-shadow:4px 4px 10px var(--clay-dark), -4px -4px 10px var(--clay-light);}
+  .btn-primary{
+    background:linear-gradient(150deg, #B9A6F5, #7C5CFC);
+    color:#fff;
+    box-shadow:
+      6px 6px 16px rgba(124,92,255,.45),
+      -6px -6px 16px #FFFFFF;
+  }
+  .btn-primary:hover{filter:brightness(1.05);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    padding:70px 0 40px;
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 20px; border-radius:999px;
+    background:var(--surface); color:var(--lav-3);
+    font-size:12.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    margin-bottom:28px;
+    box-shadow:
+      inset 3px 3px 8px var(--clay-dark),
+      inset -3px -3px 8px var(--clay-light);
+  }
+  h1{
+    font-size:clamp(38px,5.6vw,66px);
+    font-weight:700; line-height:1.1; margin:0 0 20px;
+    color:var(--plum-deep);
+    text-wrap:balance;
+    max-width:820px;
+  }
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(150deg, #A78BFA, #6D4AFF);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .sub{
+    color:var(--muted); font-size:16.5px; line-height:1.65;
+    max-width:480px; margin:0 0 36px;
+  }
+  .hero-actions{display:flex; gap:14px; margin-bottom:60px;}
+
+  /* ---------- clay card mockup ---------- */
+  .card-stage{position:relative; width:340px; height:230px;}
+  .clay-card{
+    position:absolute; left:50%; top:50%;
+    width:320px; height:200px;
+    margin:-100px 0 0 -160px;
+    border-radius:30px;
+    background:linear-gradient(150deg, #D7C9FB 0%, #A78BFA 55%, #7C5CFC 100%);
+    padding:24px 26px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    color:#fff;
+    box-shadow:
+      12px 14px 28px rgba(124,92,255,.4),
+      -10px -10px 24px #FFFFFF,
+      inset 0 2px 0 rgba(255,255,255,.35);
+  }
+  .clay-chip{
+    width:40px; height:30px; border-radius:9px;
+    background:linear-gradient(150deg,#FFFFFF,#E8E1FB);
+    box-shadow:3px 3px 8px rgba(76,50,150,.25);
+  }
+  .clay-mark{
+    position:absolute; top:22px; right:24px;
+    width:26px; height:26px; opacity:.9;
+  }
+  .clay-mid{display:flex; justify-content:space-between; font-size:12.5px; opacity:.92;}
+  .clay-bottom{display:flex; justify-content:space-between; align-items:flex-end;}
+  .clay-bank{font-weight:700; font-size:16px;}
+  .clay-bank span{font-weight:400; opacity:.85;}
+  .clay-visa{font-weight:700; font-size:17px; font-style:italic;}
+
+  .clay-ghost{
+    position:absolute; left:50%; top:50%;
+    width:300px; height:186px;
+    border-radius:28px;
+  }
+  .clay-ghost.left{
+    margin:-93px 0 0 -238px;
+    background:linear-gradient(150deg,#EFE9FB,#D7C9FB);
+    opacity:.85;
+    transform:rotate(-6deg);
+    box-shadow:8px 10px 20px rgba(124,92,255,.22), -8px -8px 18px #FFFFFF;
+    z-index:-1;
+  }
+  .clay-ghost.right{
+    margin:-93px 0 0 -62px;
+    background:linear-gradient(150deg,#E4DBF9,#C9B8FA);
+    opacity:.7;
+    transform:rotate(5deg);
+    box-shadow:8px 10px 20px rgba(124,92,255,.18), -8px -8px 18px #FFFFFF;
+    z-index:-2;
+  }
+
+  /* ---------- why-cards section ---------- */
+  .why{padding:50px 0 100px;}
+  .why-head{text-align:center; max-width:520px; margin:0 auto 44px;}
+  .why-head h2{
+    font-size:clamp(28px,3.6vw,38px); font-weight:700; color:var(--plum-deep);
+    margin:16px 0 12px;
+  }
+  .why-head h2 em{
+    font-style:normal;
+    background:linear-gradient(150deg, #A78BFA, #6D4AFF);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .why-head p{color:var(--muted); font-size:15px; margin:0;}
+
+  .why-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .why-card{
+    padding:30px 26px;
+    border-radius:26px;
+    display:flex; flex-direction:column; gap:14px;
+    transition:transform .2s ease;
+  }
+  .why-card:hover{transform:translateY(-4px);}
+  .why-icon{
+    width:52px; height:52px; border-radius:18px;
+    display:grid; place-items:center;
+    background:linear-gradient(150deg,#C9B8FA,#8B6BF0);
+    color:#fff;
+    box-shadow:
+      5px 5px 12px var(--clay-dark),
+      -5px -5px 12px var(--clay-light);
+  }
+  .why-icon svg{width:24px; height:24px;}
+  .why-card h3{margin:0; font-size:17px; font-weight:700; color:var(--plum-deep);}
+  .why-card p{margin:0; font-size:14px; line-height:1.6; color:var(--muted);}
+
+  @media (max-width:900px){
+    .why-grid{grid-template-columns:1fr; }
+    nav{display:none;}
+  }
+  @media (max-width:560px){
+    .clay-ghost{display:none;}
+    .card-stage{width:320px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 2500 2500" fill="#ffffff"><path d="M764.5 1050.9L1250 565.4l485.7 485.7 282.3-282.3L1250 0 482.2 767.8zM0 1250l282.3-282.3L564.6 1250l-282.3 282.3zm764.5 199.1L1250 1934.6l485.7-485.7 282.5 282.1-.2.2L1250 2500l-767.8-767.8-.3-.3zM1935.4 1250l282.3-282.3L2500 1250l-282.3 282.3zM1250 1017.7l232.3 232.3-232.3 232.3-232.3-232.3z"/></svg>
+      </span>
+      ODYSSEY
+    </div>
+    <nav>
+      <a href="#" class="active">Home</a>
+      <a href="#">Performance</a>
+      <a href="#">Security</a>
+      <a href="#">Reviews</a>
+    </nav>
+    <div class="nav-right">
+      <button class="btn btn-clay">Connect</button>
+      <button class="btn btn-primary">✦ Get card</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="badge">✦ Personal</div>
+    <h1>The <em>Fast</em> and <em>Secure</em><br>way to send money</h1>
+    <p class="sub">Join 30+ million customers saving on global transfers with Paymint.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary">✦ Get your card now</button>
+    </div>
+
+    <div class="card-stage">
+      <div class="clay-ghost left"></div>
+      <div class="clay-ghost right"></div>
+      <div class="clay-card">
+        <svg class="clay-mark" viewBox="0 0 2500 2500" fill="#ffffff"><path d="M764.5 1050.9L1250 565.4l485.7 485.7 282.3-282.3L1250 0 482.2 767.8zM0 1250l282.3-282.3L564.6 1250l-282.3 282.3zm764.5 199.1L1250 1934.6l485.7-485.7 282.5 282.1-.2.2L1250 2500l-767.8-767.8-.3-.3zM1935.4 1250l282.3-282.3L2500 1250l-282.3 282.3zM1250 1017.7l232.3 232.3-232.3 232.3-232.3-232.3z"/></svg>
+        <div class="clay-chip"></div>
+        <div class="clay-mid">
+          <span>Yur Name.</span>
+          <span>Yor Thing</span>
+        </div>
+        <div class="clay-bottom">
+          <div class="clay-bank">Odyssey <span>bank</span></div>
+          <div class="clay-visa">VISA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="why-head">
+      <div class="badge">✦ Why Odyssey</div>
+      <h2>Perks the <em>other guys</em> skip</h2>
+      <p>The same idea, dressed in clay — soft shapes, pastel lavender and gentle depth.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card clay-pop">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8" opacity=".5"/></svg>
+        </div>
+        <h3>Zero FX markup</h3>
+        <p>Spend and send abroad at the real interbank rate — no hidden margin stacked on top.</p>
+      </div>
+      <div class="why-card clay-pop">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+        </div>
+        <h3>Instant settlement</h3>
+        <p>Transfers clear in seconds, not the 1–3 banking days most cards still quote.</p>
+      </div>
+      <div class="why-card clay-pop">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M7 10V7a5 5 0 0110 0v3"/></svg>
+        </div>
+        <h3>Security built-in</h3>
+        <p>Wallet encryption and biometric locks come standard, not as a paid add-on.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
