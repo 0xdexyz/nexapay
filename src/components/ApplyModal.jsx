@@ -141,6 +141,24 @@ export default function ApplyModal({ open, onClose }){
     setPayStatus({ text: 'Waiting for approval in your wallet…', kind: 'pending' });
     setPayStatusLink(null);
 
+    // Local test mode: on localhost, simulate a successful payment so the
+    // flow can be tested without moving real SOL. Never runs on the live site.
+    if(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'){
+      await new Promise(r => setTimeout(r, 900));
+      setPayBtnLabel('Verifying on Solana Blockchain...');
+      setPayStatus({ text: 'Verifying on Solana Blockchain…', kind: 'pending' });
+      await new Promise(r => setTimeout(r, 700));
+      const demoTx = 'DEMOTX' + Date.now();
+      setLastTxSignature(demoTx);
+      setReceipt(buildReceipt(demoTx));
+      setStep('success');
+      setReceiptOpen(true);
+      setPayStatus({ text: '', kind: '' });
+      setPayBtnLabel('Payment Verified');
+      setPayBusy(false);
+      return;
+    }
+
     let signature = null;
     try{
       const fromPubkey = new PublicKey(address);

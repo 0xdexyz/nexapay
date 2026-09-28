@@ -8,7 +8,7 @@ export default function Footer({ onApplyOpen }){
           <div className="logo">NEXAPAY <span className="divider"></span></div>
           <p>A crypto-native card built to make everyday spending with digital assets simple.</p>
           <div className="footer-social">
-            <a href="https://x.com/TryNexapay" target="_blank" rel="noopener" aria-label="X (Twitter)"><XIcon /></a>
+            <a href="https://x.com/TryNexaPay" target="_blank" rel="noopener" aria-label="X (Twitter)"><XIcon /></a>
             <a href="#" onClick={(e) => e.preventDefault()} aria-label="Instagram"><InstagramIcon /></a>
             <a href="#" onClick={(e) => e.preventDefault()} aria-label="LinkedIn"><LinkedInIcon /></a>
           </div>

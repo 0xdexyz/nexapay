@@ -1,9 +1,5 @@
 export function LogoMarkIcon(props){
-  return (
-    <svg className="logo-mark" viewBox="0 0 2500 2500" fill="#ffffff" aria-hidden="true" {...props}>
-      <path d="M200 200L1150 200L1150 1150L200 1150Z M1350 1350L2300 1350L2300 2300L1350 2300Z M1350 200L2300 200L2300 1150L1750 1150L1350 750Z M1150 2300L200 2300L200 1350L750 1350L1150 1750Z M1350 750L1750 1150L1150 1750L750 1350Z"/>
-    </svg>
-  );
+  return <img className="logo-mark" src="/assets/logo.png" alt="Nexapay" {...props} />;
 }
 
 export function CardMarkIcon(){

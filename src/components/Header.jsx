@@ -77,7 +77,7 @@ export default function Header({ onApplyOpen }){
           <a href="#reviews">Reviews</a>
         </nav>
         <div className="nav-right">
-          <a href="https://x.com/TryNexapay" target="_blank" rel="noopener" className="btn btn-x" aria-label="Follow on X">
+          <a href="https://x.com/TryNexaPay" target="_blank" rel="noopener" className="btn btn-x" aria-label="Follow on X">
             <XIcon />
           </a>
           <div className="wallet-widget" id="walletWidget" ref={widgetRef}>
